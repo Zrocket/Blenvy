@@ -23,6 +23,7 @@ fn find_entity_components(
     reflect_components: Vec<(Box<dyn PartialReflect>, TypeRegistration)>,
     entity_components: &HashMap<Entity, Vec<(Box<dyn PartialReflect>, TypeRegistration)>>,
 ) -> (Entity, Vec<(Box<dyn PartialReflect>, TypeRegistration)>) {
+    //
     // we assign the components specified /xxx_components objects to their parent node
     let mut target_entity = entity;
     // if the node contains "components" or ends with "_pa" (ie add to parent), the components will not be added to the entity itself but to its parent
@@ -46,7 +47,8 @@ fn find_entity_components(
         for (component, type_registration) in current_components {
             //updated_components.push((component.clone().downcast().unwrap(), type_registration.clone()));
             updated_components.push((
-                component.reflect_clone().unwrap(),
+                //component.reflect_clone().unwrap(),
+                component.to_dynamic(),
                 type_registration.clone(),
             ));
         }
