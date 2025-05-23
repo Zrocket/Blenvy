@@ -52,7 +52,8 @@ fn find_entity_components(
         }
         // then inject the new components: this also enables overwrite components set in the collection
         for (component, type_registration) in reflect_components {
-            updated_components.push((component.reflect_clone().unwrap(), type_registration));
+            //updated_components.push((component.reflect_clone().unwrap(), type_registration));
+            updated_components.push((component.to_dynamic(), type_registration));
         }
         return (target_entity, updated_components);
     }
